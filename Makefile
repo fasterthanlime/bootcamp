@@ -2,3 +2,6 @@
 
 all:
 	./test-suite.sh	
+
+clean:
+	rm -rf build/
