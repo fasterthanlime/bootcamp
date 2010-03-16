@@ -1,13 +1,21 @@
 #! /usr/bin/env bash
 
-if [ $OOC=="" ]; then
+trap bashtrap INT
+
+bashtrap() {
+    "Interrupted! exiting.."
+    exit 0
+}
+
+if [ ! "$OOC" ]; then
     OOC="ooc"
 fi
-OOC_FLAGS="${OOC_FLAGS} -v -g +-O0 -editor=''"
+OOC_FLAGS="${OOC_FLAGS} -v -g +-O0 -editor='' -shout"
 builddir="build"
 launchedprocs=""
 maxjobs=3
- 
+echo 0 > .bctotal
+
 walk_tree() {
     local IFS outpath
 	ls "$1" | while IFS= read i; do
@@ -15,13 +23,15 @@ walk_tree() {
 			echo "$i/"
 			walk_tree "$1/$i" "$2" | sed -r 's/^/\t/'
 		else
-            condition=$(echo "$i" | grep -E "$2$")
-            if [ condition!="" ]; then
+            if [[ $i =~ .*\.ooc ]]; then
                 outpath=$(echo "${builddir}/$1/$i" | sed -r 's/\.ooc//')
                 mkdir -p ${outpath}
         
-                echo "$i"
-                ${OOC} ${OOC_FLAGS} -sourcepath=$1 -outpath=${outpath} -o=${outpath/exec} $i &> ${outpath}/compile.log &
+                declare -i total
+                total=$(cat .bctotal)+1
+                echo ${total} > .bctotal
+                echo "$i (test #${total})"
+                ${OOC} ${OOC_FLAGS} -sourcepath=$1 -outpath=${outpath} -o=${outpath}/exec $i &> ${outpath}/compile.log &
                 launchedprocs=$(printf "${launchedprocs}\n$!")
                 waitforprocs
             fi
@@ -38,10 +48,21 @@ waitforprocs() {
         if [[ ${remainprocs} -lt ${maxjobs} ]]; then
             break
         fi
-        echo "Got ${remainprocs} processes running, waiting.."
-        sleep 0.2
+        sleep 0.1
     done
 }
 
-rm -rf ${builddir} 
-walk_tree "source/" "\.ooc$"
+walk_tree "source" "\.ooc"
+rm .bctotal
+
+logs=$(find build/ -name "*.log")
+
+# count number of failed tests
+echo "" > .failcount > .okcount
+failcount=$(cat $logs | grep -E '\[FAIL\]' | sed -n '$=')
+okcount=$(  cat $logs | grep -E '\[ OK \]' | sed -n '$=')
+total=$(    echo $logs | sed -r 's/ /\n/g' | sed -n '$=')
+
+declare -i wtfcount
+wtfcount=total-failcount-okcount
+echo "Compiled ${total} tests, ${okcount} OK, ${failcount} FAILED, ${wtfcount} WTF =)"
