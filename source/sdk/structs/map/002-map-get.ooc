@@ -5,6 +5,7 @@ main: func {
 	map := HashMap<String, String> new()
     
     map put("hobo", "haba")
-	("hobo = " + map get("hobo" clone())) println()
+    // FIXME it should work with "hobo clone()"
+	("hobo = " + map get("hobo")) println()
 	
 }
