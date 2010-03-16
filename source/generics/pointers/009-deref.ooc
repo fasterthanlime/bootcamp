@@ -2,7 +2,7 @@ import structs/ArrayList
 
 main: func {
     
-    list := ["John", "Doe"] as ArrayList<String>
+    list := ["John", "Doe"]
     firstname, lastname: String
     getNames(list, firstname&, lastname&)
     
