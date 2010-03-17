@@ -31,7 +31,7 @@ walk_tree() {
                 total=$(cat .bctotal)+1
                 echo ${total} > .bctotal
                 echo "$i (test #${total})"
-                ${OOC} ${OOC_FLAGS} -sourcepath=$1 -outpath=${outpath} -o=${outpath}/exec $i &> ${outpath}/compile.log &
+                ${OOC} ${OOC_FLAGS} -sourcepath=$1 -outpath=${outpath} $i -o=${outpath}/exec &> ${outpath}/compile.log &
                 launchedprocs=$(printf "${launchedprocs}\n$!")
                 waitforprocs
             fi
