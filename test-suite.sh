@@ -49,7 +49,6 @@ waitforprocs() {
         if [[ ${remainprocs} -lt $1 ]]; then
             break
         fi
-        echo "got ${remainprocs} remaining processes, max $1"
         sleep 0.2
     done
 }
