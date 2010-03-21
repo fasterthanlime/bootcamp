@@ -8,5 +8,8 @@ main: func {
 		"match!" println()
 	}
 
-    "Substring #1: %s\n Substring #2: %s" format(m substring(1), m substring(2)) println()
+    "Subgroups..." println()
+    for(group: String in m) {
+        group println()
+    }
 }
