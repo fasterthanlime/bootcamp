@@ -32,8 +32,8 @@ walk_tree() {
                 echo ${total} > .bctotal
                 echo "$i (test #${total})"
                 ${OOC} ${OOC_FLAGS} -sourcepath=$1 -outpath=${outpath} $i -o=${outpath}/exec &> ${outpath}/compile.log &
-                launchedprocs=$(printf "${launchedprocs}\n$!")
-                waitforprocs
+                echo "$!" >> .launchedprocs
+                waitforprocs ${maxjobs}
             fi
 		fi
 	done
@@ -44,15 +44,20 @@ waitforprocs() {
     while true; do
         waiting=0
         runningprocs=$(ps x | sed -r 's/[ ]*([0-9]+) .*/\1/g')
+        launchedprocs=$(cat .launchedprocs)
         remainprocs=$(printf "${launchedprocs}\n${runningprocs}" | sed 's/^[ \t]*//;s/[ \t]*$//' | sort | uniq -d | sed -n '$=')
-        if [[ ${remainprocs} -lt ${maxjobs} ]]; then
+        if [[ ${remainprocs} -lt $1 ]]; then
             break
         fi
-        sleep 0.1
+        echo "got ${remainprocs} remaining processes, max $1"
+        sleep 0.2
     done
 }
 
-walk_tree "source" "\.ooc"
+walk_tree "$1" "\.ooc"
+waitforprocs 1
+echo "Finished compiling now"
+
 rm .bctotal
 
 logs=$(find build/ -name "*.log")

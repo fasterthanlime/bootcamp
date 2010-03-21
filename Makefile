@@ -1,7 +1,7 @@
 .PHONY: all
 
 all:
-	./test-suite.sh	
+	./test-suite.sh	source/
 
 rock:
 	OOC=rock make all 
