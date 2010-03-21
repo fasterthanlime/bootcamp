@@ -15,7 +15,7 @@ main: func {
     }
 
     "Keys = " println()
-    for(k : String in mm keys) k println()
+    for(k : String in mm getKeys()) k println()
     
     "Values = " println()
     for(m in mm) m println()
