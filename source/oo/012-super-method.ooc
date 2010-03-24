@@ -11,11 +11,13 @@ Animal: class {
 Dog: class extends Animal {
 	
 	poke: func {
-		super poke()
+		//super poke()
+        super()
 		"Dog pokidi-poke" println()
 	}
 	
 }
 
-
-Dog new() poke()
+main: func {
+	Dog new() poke()
+}
