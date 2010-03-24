@@ -8,6 +8,8 @@ main: func {
 		"match!" println()
 	}
 
+    "Match starts at %d and ends at %d" format(m start(0), m end(0)) println()
+
     "Subgroups..." println()
     for(group: String in m) {
         group println()
