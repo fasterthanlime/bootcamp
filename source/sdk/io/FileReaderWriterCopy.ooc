@@ -1,9 +1,13 @@
-import text/Buffer
+import text/Buffer, io/[FileReader, FileWriter]
 
 main: func {
-    dest := FileWriter new("hosts")
-    source := FileReader new("/etc/hosts")
+    source1 := FileReader new("/etc/hosts")
+    dest1   := BufferWriter new()
+    source2 := BufferReader new(dest1 buffer())
+    dest2   := FileWriter new("hosts")
 
-    dest write(source)
-    dest buffer() toString() println()
+    dest1 write(source1, 12)
+    dest2 write(source2, 12)
+    
+    dest2 close()
 }
