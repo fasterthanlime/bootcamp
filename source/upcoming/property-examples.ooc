@@ -31,7 +31,7 @@ class: PropertyAlphabet {
         }
     }
 
-    // What's this? No getter? That's right. 'obj e' is be an error, but
+    // What's this? No getter? That's right. 'obj e' would be an error, but
     // 'obj e = 1' will work. (This is more useful for properties that do some
     // calcuation and set other properties or call methods.)
     e: Int {
