@@ -2,7 +2,7 @@ Person: class {
     /* An advanced property. */
     age: UInt {
         set (=age) {
-            if(_age > 120)
+            if(age > 120)
                 "IMBA!" println()
         }
         get // default getter
