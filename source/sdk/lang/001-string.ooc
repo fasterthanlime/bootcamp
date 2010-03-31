@@ -55,12 +55,12 @@ test("toULong", func {
 })
 
 test("toFloat", func {
-    assert("3.14" toFloat() == 3.14, "3.14 to float")
-    assert("-0.1234" toFloat() == -0.1234, "-0.11234 to float")
+    assert("3.14" toFloat() == 3.14 as Float, "3.14 to float")
+    assert("-0.1234" toFloat() == -0.1234 as Float, "-0.11234 to float")
 })
 
 test("toDouble", func {
-    assert("1.123456789123456789123456789" toDouble() == 1.123456789123456789123456789, "1.123456789123456789123456789 to float")
+    assert("1.123456789123456789123456789" toDouble() == 1.123456789123456789123456789, "1.123456789123456789123456789 to double")
 })
 
 test("isEmpty", func {
