@@ -1,6 +1,6 @@
-import io/File, structs/[Array, ArrayList], os/Terminal
+import io/File, structs/ArrayList, os/Terminal
 
-main: func (args: Array<String>) {
+main: func (args: ArrayList<String>) {
 
     path := "."
     if(args size() > 1)
