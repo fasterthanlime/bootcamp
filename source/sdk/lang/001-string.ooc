@@ -195,15 +195,15 @@ test("format", func {
 })
 
 test("scanf", func {
-    s := "The magic number is 28. The sky is blue. Today is the 30th."
-    format := "The magic number is %d. The sky is %s. Today is the %dth."
+    s := "The magic number is 28. The sky is blue . Today is the 30 th."
+    format := "The magic number is %d. The sky is %s . Today is the %d th."
     number := 0; date := 0
     sky := String new(100)
 
     s scanf(format, number&, sky, date&)
     assert(number == 28, "number scanned was not 28")
-    assert(sky == "blue", "sky was not blue")
-    assert(date == 30, "date was not 30th")
+    assert(sky == "blue", "sky was not blue but '%s'" format(sky))
+    assert(date == 30, "date was not 30th but '%d'" format(date))
 })
 
 test("iterator", func {
