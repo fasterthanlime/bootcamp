@@ -10,7 +10,7 @@ Cat: class {
 
 main: func { 
 
-  hm := HashMap<Cat> new()
+  hm := HashMap<String, Cat> new()
   hm put("ohoh", Cat new("Catbert"))
 
   r1 := hm get("ohoh")
