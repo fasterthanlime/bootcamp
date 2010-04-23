@@ -4,10 +4,7 @@ Dog: class {
             "set() - old value: %s - new value: %s" format(get(), value) println()
             name = value
         }
-        get {
-            "get() -> %s" format(name) println()
-            name
-        }
+        get 
     }
 }
 
