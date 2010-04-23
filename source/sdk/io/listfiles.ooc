@@ -19,7 +19,7 @@ main: func (args: ArrayList<String>) {
             Terminal setAttr(Attr bright)
             Terminal setFgColor(Color green)
         }
-        
+
         printf("%s  ", f name())
     }
 

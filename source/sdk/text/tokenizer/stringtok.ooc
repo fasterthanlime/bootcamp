@@ -1,6 +1,6 @@
 import text/StringTokenizer
 
-main: func {
+main2: func {
     for(part in "One.two..." split('.', true))
         "'%s' " format(part) print()
     println()

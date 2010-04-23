@@ -2,9 +2,9 @@ import structs/OrderedMultiMap
 
 main: func {
  
-    map := OrderedMultiMap<Int, Cell<Int>> new(3)
+    map := OrderedMultiMap<Int, Cell<Int>> new(2)
     
-    for(i in 0..10) {
+    for(i in 0..50) {
         map put(i, Cell<Int> new(i))
     }
     
