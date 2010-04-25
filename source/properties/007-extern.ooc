@@ -1,7 +1,7 @@
 Test: class {
     name: String {
-        extern(getMyName) get
-        extern(setMyName) set
+        get: extern(getMyName)
+        set: extern(setMyName)
     }
 }
 
