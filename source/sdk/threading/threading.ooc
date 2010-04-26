@@ -1,4 +1,4 @@
-import threading/[Runnable, Thread], os/Time
+import threading/[Runnable, Thread], os/Time, math
 
 include stdlib
 usleep: extern func (Int)
