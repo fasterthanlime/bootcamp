@@ -1,15 +1,15 @@
 Counter: class {
     init: func {
-        This count = This count + 1 // TODO
+        count = count + 1 // TODO
     }
 
     count: static UInt {
         set(=count) {
-            "set(%d)" format(This count) println()
+            "set(%d)" format(count) println()
         }
         get {
-            "get() -> %d" format(This count) println()
-            This count
+            "get() -> %d" format(count) println()
+            count
         }
     }
 }
